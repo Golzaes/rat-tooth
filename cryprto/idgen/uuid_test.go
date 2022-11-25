@@ -1,0 +1,26 @@
+package idgen
+
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+)
+
+var args = NewUuidArgs(2, `test`)
+var GensUUid = []func() (string, error){
+	args.GenerateUUID1,
+	args.GenerateUUID3,
+	args.GenerateUUID4,
+	args.GenerateUUID5,
+	args.GenerateUUID6,
+	args.GenerateUUID7,
+}
+
+func TestUuiGen(t *testing.T) {
+	for i := 0; i < len(GensUUid); i++ {
+		s, err := GensUUid[i]()
+		require.Nil(t, err)
+		assert.NotEmpty(t, s)
+	}
+}
