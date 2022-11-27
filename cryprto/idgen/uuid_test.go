@@ -3,7 +3,6 @@ package idgen
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
@@ -21,7 +20,6 @@ func TestUuiGen(t *testing.T) {
 	for _, f := range GensUUid {
 		s, err := f()
 		require.Nil(t, err)
-		assert.NotEmpty(t, s)
 		require.True(t, IsValidUUID(s))
 	}
 }
