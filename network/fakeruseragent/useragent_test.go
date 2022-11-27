@@ -6,10 +6,13 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestRandomMobileUserAgent(t *testing.T) {
-	assert.NotEmpty(t, RandomMobileUserAgent())
+var fakerUa = []func() string{
+	RandomMobileUserAgent,
+	RandomMobileUserAgent,
 }
 
 func TestRandomUserAgent(t *testing.T) {
-	assert.NotEmpty(t, RandomUserAgent())
+	for _, f := range fakerUa {
+		assert.NotEmpty(t, f())
+	}
 }

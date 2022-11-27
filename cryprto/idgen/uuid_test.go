@@ -18,8 +18,8 @@ var GensUUid = []func() (string, error){
 }
 
 func TestUuiGen(t *testing.T) {
-	for i := 0; i < len(GensUUid); i++ {
-		s, err := GensUUid[i]()
+	for _, f := range GensUUid {
+		s, err := f()
 		require.Nil(t, err)
 		assert.NotEmpty(t, s)
 	}
