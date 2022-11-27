@@ -22,5 +22,6 @@ func TestUuiGen(t *testing.T) {
 		s, err := f()
 		require.Nil(t, err)
 		assert.NotEmpty(t, s)
+		require.True(t, IsValidUUID(s))
 	}
 }
