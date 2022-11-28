@@ -307,7 +307,7 @@ func TestInheritsFrom(t *testing.T) {
 	}
 
 	tests := []struct {
-		object   any
+		object   interface{}
 		inherits bool
 		name     string
 	}{
@@ -387,13 +387,13 @@ func TestInheritsFrom(t *testing.T) {
 }
 
 func TestIsEmpty(t *testing.T) {
-	type testInterface any
+	type testInterface interface{}
 
 	var testEmptyPtr testInterface
 	aFilledChannel := make(chan struct{}, 1)
 	aFilledChannel <- struct{}{}
 	tests := []struct {
-		value   any
+		value   interface{}
 		isEmpty bool
 	}{
 		{
@@ -453,11 +453,11 @@ func TestIsEmpty(t *testing.T) {
 			isEmpty: true,
 		},
 		{
-			value:   map[string]any{},
+			value:   map[string]interface{}{},
 			isEmpty: true,
 		},
 		{
-			value:   map[string]any{"foo": "bar"},
+			value:   map[string]interface{}{"foo": "bar"},
 			isEmpty: false,
 		},
 		{
@@ -509,14 +509,14 @@ func TestToStructPtr(t *testing.T) {
 		Test2: vInt,
 		test3: vPrt,
 	}
-	var vEmpty any
-	type testInterface any
+	var vEmpty interface{}
+	type testInterface interface{}
 
 	var vInterface testInterface
 
 	tests := []struct {
-		input          any
-		expectedOutput any
+		input          interface{}
+		expectedOutput interface{}
 		expectedError  error
 	}{
 		{

@@ -8,22 +8,22 @@ import (
 	"github.com/golzaes/rat-tooth/commonerrors"
 )
 
-func GetUnexportedStructureField(structure any, fieldName string) any {
+func GetUnexportedStructureField(structure interface{}, fieldName string) interface{} {
 	return GetStructureField(fetchStructureField(structure, fieldName))
 }
 
-func GetStructureField(field reflect.Value) any {
+func GetStructureField(field reflect.Value) interface{} {
 	if !field.IsValid() {
 		return nil
 	}
 	return reflect.NewAt(field.Type(), unsafe.Pointer(field.UnsafeAddr())).Elem().Interface()
 }
 
-func SetUnexportedStructureField(structure any, fieldName string, value any) {
+func SetUnexportedStructureField(structure interface{}, fieldName string, value interface{}) {
 	SetStructureField(fetchStructureField(structure, fieldName), value)
 }
 
-func SetStructureField(field reflect.Value, value any) {
+func SetStructureField(field reflect.Value, value interface{}) {
 	if !field.IsValid() {
 		return
 	}
@@ -33,7 +33,7 @@ func SetStructureField(field reflect.Value, value any) {
 }
 
 // fetchStructureField 返回具有给定名称的结构字段
-func fetchStructureField(structure any, fieldName string) reflect.Value {
+func fetchStructureField(structure interface{}, fieldName string) reflect.Value {
 	return reflect.ValueOf(structure).Elem().FieldByName(fieldName)
 }
 
@@ -42,7 +42,7 @@ func fetchStructureField(structure any, fieldName string) reflect.Value {
 // If the boolean is false then there is no such field on the structure.
 // If the boolean is true but the interface stores "" then the field exists but is not set.
 // If the boolean is true and the interface is not emtpy, the field exists and is set.
-func GetStructField(structure any, fieldName string) (any, bool) {
+func GetStructField(structure interface{}, fieldName string) (interface{}, bool) {
 	Field := fetchStructureField(structure, fieldName)
 	if !Field.IsValid() {
 		return "", false
@@ -61,7 +61,7 @@ func GetStructField(structure any, fieldName string) (any, bool) {
 // SetStructField attempts to set a field of a structure to the given vaule
 // It returns nil or an error, in case the field doesn't exist on the structure
 // or the value and the field have different types
-func SetStructField(structure any, fieldName string, value any) error {
+func SetStructField(structure interface{}, fieldName string, value interface{}) error {
 	ValueStructure := reflect.ValueOf(structure)
 	Field := ValueStructure.Elem().FieldByName(fieldName)
 	// Test field exists on structure
@@ -121,7 +121,7 @@ func SetStructField(structure any, fieldName string, value any) error {
 
 // InheritsFrom uses reflection to find if a struct "inherits" from a certain type.
 // In other words it checks whether the struct embeds a struct of that type.
-func InheritsFrom(object any, parentType reflect.Type) bool {
+func InheritsFrom(object interface{}, parentType reflect.Type) bool {
 	if parentType == nil {
 		return object == nil
 	}
@@ -192,7 +192,7 @@ func InheritsFrom(object any, parentType reflect.Type) bool {
 }
 
 // IsEmpty checks whether a value is empty i.e. "", nil, 0, [], {}, false, etc.
-func IsEmpty(value any) bool {
+func IsEmpty(value interface{}) bool {
 	if value == nil {
 		return true
 	}
@@ -213,7 +213,7 @@ func IsEmpty(value any) bool {
 }
 
 // ToStructPtr returns an instance of the pointer (interface) to the object obj.
-func ToStructPtr(obj reflect.Value) (val any, err error) {
+func ToStructPtr(obj reflect.Value) (val interface{}, err error) {
 	if !obj.IsValid() {
 		err = fmt.Errorf("%w: obj value [%v] is not valid", commonerrors.ErrUnsupported, obj)
 		return

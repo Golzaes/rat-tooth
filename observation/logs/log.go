@@ -33,8 +33,8 @@ func (c *logger) Log(level Level, kv ...interface{}) error {
 	return nil
 }
 
-// With with logger fields.
-func With(l Logger, kv ...interface{}) Logger {
+// WithLog with logger fields.
+func WithLog(l Logger, kv ...interface{}) Logger {
 	c, ok := l.(*logger)
 	if !ok {
 		return &logger{logger: l, prefix: kv, hasValuer: containsValuer(kv), ctx: context.Background()}

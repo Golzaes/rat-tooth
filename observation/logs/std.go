@@ -20,7 +20,7 @@ func NewStdLogger(w io.Writer) Logger {
 	return &stdLogger{
 		log: log.New(w, "", 0),
 		pool: &sync.Pool{
-			New: func() any {
+			New: func() interface{} {
 				return new(bytes.Buffer)
 			},
 		},
@@ -28,7 +28,7 @@ func NewStdLogger(w io.Writer) Logger {
 }
 
 // Log print the kv pairs log.
-func (l *stdLogger) Log(level Level, kv ...any) error {
+func (l *stdLogger) Log(level Level, kv ...interface{}) error {
 	if len(kv) == 0 {
 		return nil
 	}
