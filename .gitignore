@@ -23,7 +23,7 @@
 cmake-build-*/
 
 
-# File-based project format
+# File-based projectName format
 *.iws
 
 # IntelliJ

@@ -8,11 +8,12 @@ import (
 	"time"
 )
 
-// DefaultCaller is a Valuer that returns the file and line.
-var DefaultCaller = Caller(4)
-
-// DefaultTimestamp is a Valuer that returns the current wallclock time.
-var DefaultTimestamp = Timestamp(time.RFC3339)
+var (
+	// DefaultCaller is a Valuer that returns the file and line.
+	DefaultCaller = Caller(4)
+	// DefaultTimestamp is a Valuer that returns the current wallclock time.
+	DefaultTimestamp = Timestamp(time.RFC3339)
+)
 
 // Valuer is returns a log value.
 type Valuer func(ctx context.Context) interface{}
