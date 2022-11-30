@@ -57,7 +57,6 @@ func TestLoggerLog(t *testing.T) {
 			logger.Formatter = test.formatter
 			wrapped := NewLogger(logger)
 			_ = wrapped.Log(test.logLevel, test.kvs...)
-
 			if !strings.HasPrefix(output.String(), test.want) {
 				t.Errorf("TestName(%s): %s has not prefix %s", name, output.String(), test.want)
 			}

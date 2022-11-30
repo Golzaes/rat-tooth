@@ -18,18 +18,14 @@ type Helper struct {
 }
 
 // NewHelper new a logger helper.
-func NewHelper(logger Logger, opts ...HelperOption) *Helper {
+func NewHelper(l Logger, opts ...HelperOption) *Helper {
 	h := &Helper{}
 	h.Init()
-	h.logger = logger
+	h.logger = l
 	for _, f := range opts {
 		f(h)
 	}
 	return h
-}
-
-func (h *Helper) Init() {
-	h.msgKey = DefaultMessageKey
 }
 
 // WithContext returns a shallow copy of h with its context changed
@@ -41,7 +37,11 @@ func (h *Helper) WithContext(ctx context.Context) *Helper {
 	}
 }
 
-// Log Print log by level and keyvals.
+func (h *Helper) Init() {
+	h.msgKey = DefaultMessageKey
+}
+
+// Log Print log by level and key values
 func (h *Helper) Log(level Level, kvs ...interface{}) {
 	_ = h.logger.Log(level, kvs...)
 }
