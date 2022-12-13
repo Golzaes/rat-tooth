@@ -5,9 +5,9 @@ name: CI
 
 on:
   push:
-    branches: [ dev, test, pre, gray, sim, prod, main ]
+    branches: [ dev, test, pre, gray, sim, prod, master, main ]
   pull_request:
-    branches: [ main ]
+    branches: [ master, main ]
     paths-ignore:
       - '**/*.md'
       - '**/*.txt'
