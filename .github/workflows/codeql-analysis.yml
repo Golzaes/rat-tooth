@@ -13,7 +13,20 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ dev, test, pre, gray, sim, prod, master, main ]
+    branches: [
+      dev,
+      test,
+      sit,
+      uat,
+      pre,
+      gray,
+      sim,
+      fat,
+      prod,
+      master,
+      main,
+      dr
+    ]
   pull_request:
     branches: [ master, main ]
     paths-ignore:
