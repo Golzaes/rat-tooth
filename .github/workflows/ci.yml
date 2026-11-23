@@ -44,7 +44,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Use go ${{ matrix.go-version }} environment
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v4
         with:
           go-version: ${{ matrix.go-version }}
 
