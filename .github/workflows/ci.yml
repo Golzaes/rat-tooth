@@ -41,7 +41,7 @@ jobs:
           #          macos-latest,
         ]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
 
       - name: Use go ${{ matrix.go-version }} environment
         uses: actions/setup-go@v4
